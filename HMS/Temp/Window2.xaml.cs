@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using HMS.DataRecords;
+using HMS.DataRecords;
+using HMS.DataProviders;
+using HMS.DataVirtualization;
+
+namespace HMS
+{
+    /// <summary>
+    /// Логика взаимодействия для Window2.xaml
+    /// </summary>
+    public partial class Window2 : Window
+    {
+        private BatchesProvider batchesProvider;
+
+        public Window2()
+        {
+            InitializeComponent();
+
+            batchesProvider = new BatchesProvider(1000, 0);
+            AsyncVirtualizingCollection<BatchRecord> batchesList = new AsyncVirtualizingCollection<BatchRecord>(batchesProvider, 1000, 3000);
+            dg.ItemsSource = batchesList;
+        }
+        private void ArticlesPanelBtn_Click(object sender, RoutedEventArgs e)
+        {
+           //if (ArticlesPanelBtn.IsLoaded == true)
+           //{
+           //    if (ArticlesPanelBtn.IsChecked == true)
+           //    {
+           //        ArticlesPanel.Visibility = Visibility.Visible;
+           //        gs.Visibility = Visibility.Visible;
+           //        articles_lv.ItemsSource = Articles;//change
+           //    }
+           //    else
+           //    {
+           //        ArticlesPanel.Visibility = Visibility.Collapsed;
+           //        gs.Visibility = Visibility.Collapsed;
+           //        column1.Width = GridLength.Auto;
+           //
+           //    }
+           //}
+            
+
+        }
+
+        public IList<ArticleRecord> Articles
+        {
+            get { return (IList<ArticleRecord>)GetValue(ArticlesProperty); }
+            set { SetValue(ArticlesProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Articles.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ArticlesProperty =
+            DependencyProperty.Register("Articles", typeof(IList<ArticleRecord>), typeof(Window2), new PropertyMetadata(null));
+    }
+}

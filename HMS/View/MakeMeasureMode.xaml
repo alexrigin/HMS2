@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="HMS.View.MakeMeasureMode"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:Tabs="clr-namespace:HMS.View.Tabs"
+             mc:Ignorable="d" 
+             d:DesignHeight="388" d:DesignWidth="726">
+    <Grid Name="ParentGrid">
+        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Name="column0" Width="Auto"/>
+            <ColumnDefinition Name="column1" Width="0.01*"/>
+            <ColumnDefinition Name="column2" Width="Auto"/>
+            <ColumnDefinition Name="column3" MinWidth="100" Width="100*" />
+        </Grid.ColumnDefinitions>
+
+        
+
+        <StackPanel Grid.Column="0" Name="buttonBar" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0">
+            <StackPanel.LayoutTransform>
+                <RotateTransform Angle="90"/>
+            </StackPanel.LayoutTransform>
+            <ToggleButton Name="ArticlesPanelBtn" Content="Артикулы" Click="ArticlesPanelBtn_Click" Margin="5,0,0,5" />
+        </StackPanel>
+
+
+        <Grid Name="MainArea" Grid.Column="3">
+            <!-- Define four rows: -->
+            <GroupBox Header="Измерения"  Margin="5">
+                <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="MainTabControl" TabStripPlacement="Top" BorderThickness="3" BorderBrush="black">
+                    <TabItem Header="Диаметр" >
+                        <Grid Background="Azure">
+                            <Tabs:HeightTab x:Name="HeightTab" DataContext="{Binding}" Visibility="Visible"/>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Высота">
+                        <Grid Background="Yellow">
+
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem Header="Высота закатки" Controls:ControlsHelper.HeaderFontSize="30">
+
+                        <Grid Background="Red">
+
+                        </Grid>
+                    </TabItem>
+
+                </Controls:MetroAnimatedSingleRowTabControl>
+            </GroupBox>
+        </Grid>
+
+
+        <Grid Name="ArticlesPanel" Grid.Column="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+
+            <GroupBox Header="Артикулы">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Grid.Row="0">
+                        <!--Button Width="26" Name="ArticlesPanelPin" DockPanel.Dock="Right" Click="ArticlesPanelPin_Click" Background="White">
+                        <Image Name="pane1PinImage" Source="pinHorizontal.gif"/>
+                    </-->
+                        <!--TextBlock Padding="8" TextTrimming="CharacterEllipsis" Foreground="Black" DockPanel.Dock="Left"></-->
+                    </DockPanel>
+                    <ListView x:Name="articles_dg"  Grid.Row="1" Margin="5,5,5,5" MouseDoubleClick="articles_dg_MouseDoubleClick" >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" />
+                                    <TextBlock Grid.Row="1" Text="{Binding Path=Number}" />
+
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <GridSplitter Name="gs" Width="5" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ResizeBehavior="PreviousAndNext" Visibility="Collapsed" />
+
+    </Grid>
+</UserControl>

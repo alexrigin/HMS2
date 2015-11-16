@@ -39,14 +39,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\ExtendedGrid.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,6 +69,10 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.0.2000.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.DataGrid, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Xceed.Wpf.DataGrid.dll</HintPath>
@@ -74,16 +87,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddArticleWindow.xaml.cs">
+    <Compile Include="View\AddArticleWindow.xaml.cs">
       <DependentUpon>AddArticleWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\IsObsoleteToTextDecorationsConverter.cs" />
     <Compile Include="Converters\QuantityToBackgroundConverter.cs" />
     <Compile Include="Converters\QuantityToForegroundConverter.cs" />
     <Compile Include="Converters\VisbilityToBooleanConverter.cs" />
-    <Compile Include="DataGrid.xaml.cs">
-      <DependentUpon>DataGrid.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Converters\VisibilityToNullableBooleanConverter.cs" />
+    <Compile Include="Temp\DataConverter_boolToVisibility.cs" />
+    <Compile Include="Temp\DataConverter_VisibilityToBool.cs" />
     <Compile Include="DataProviders\ArticlesProvider.cs" />
     <Compile Include="DataProviders\BatchesProvider.cs" />
     <Compile Include="DataRecords\ArticleRecord.cs" />
@@ -96,21 +109,22 @@
     <Compile Include="DataVirtualization\VirtualizingCollection.cs" />
     <Compile Include="Managers\DBManager.cs" />
     <Compile Include="Tools\Tools.cs" />
+    <Compile Include="View\Tabs\HeightTab.xaml.cs">
+      <DependentUpon>HeightTab.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="View\MakeMeasureMode.xaml.cs">
+      <DependentUpon>MakeMeasureMode.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddArticleWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="DataGrid.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="View\WatchMode.xaml.cs">
+      <DependentUpon>WatchMode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Temp\Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\AddArticleWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -119,15 +133,27 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataVirtualization\IItemsProvider.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Tabs\HeightTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window1.xaml">
+    <Page Include="View\MakeMeasureMode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WatchMode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Temp\Window2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +185,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -183,10 +210,18 @@
     <Content Include="bin\Debug\System.Data.SQLite.dll" />
     <Content Include="bin\Debug\System.Data.SQLite.EF6.dll" />
     <Content Include="bin\Debug\System.Data.SQLite.EF6.pdb" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.dll" />
+    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.pdb" />
     <Content Include="bin\Debug\Xceed.Wpf.DataGrid.dll" />
     <Content Include="bin\Debug\Xceed.Wpf.Toolkit.dll" />
     <Content Include="bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll" />
-    <Resource Include="cup.png" />
+    <Resource Include="Temp\minusBtn.png" />
+    <Resource Include="Temp\plusBtn.bmp" />
+    <Resource Include="NuGetCommands.txt" />
+    <Resource Include="View\mahapps.metro.logo2.ico" />
+    <Resource Include="Resources\Entypo-license.txt" />
+    <Resource Include="Resources\WindowsIcons-license.txt" />
+    <Resource Include="View\cup.png" />
     <Resource Include="bin\Debug\System.Data.SQLite.EF6.xml" />
     <Content Include="bin\Debug\System.Data.SQLite.Linq.dll" />
     <Content Include="bin\Debug\System.Data.SQLite.Linq.pdb" />

@@ -7,10 +7,11 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
+
 namespace HMS.Converters
 {
     [System.Windows.Markup.MarkupExtensionReturnType(typeof(IValueConverter))]
-    public class VisbilityToBooleanConverter :  IValueConverter
+    public class VisbilityToBooleanConverter : IValueConverter
     {
         #region IValueConverter Members
 

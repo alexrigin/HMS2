@@ -5,5 +5,8 @@
     <Setting Name="DBConnectionString" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Data Source=temp3.db; Version=3;</Value>
     </Setting>
+    <Setting Name="ArticlesPanelWidth" Type="System.Windows.GridLength" Scope="User">
+      <Value Profile="(Default)">Auto</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

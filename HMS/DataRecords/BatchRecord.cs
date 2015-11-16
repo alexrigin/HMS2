@@ -9,7 +9,6 @@ namespace HMS.DataRecords
 {
     public class BatchRecord
     {
-        //private String _fileName; // необходимо, если данные хранятся в файле
         private int _id;
         private int _articleId;
         private string _articleName;

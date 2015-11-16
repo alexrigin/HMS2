@@ -11,48 +11,68 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data.SQLite;
 using System.Diagnostics;
-using System.Threading;
-using System.Windows.Threading;
-using HMS.Managers;
-using HMS.DataProviders;
+using MahApps.Metro.Controls;
 using HMS.DataRecords;
-using HMS.DataVirtualization;
-
+using HMS.Managers;
 
 namespace HMS.View
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для MainWindow3.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
-        private BatchesProvider batchesProvider;
+
         public MainWindow()
         {
             InitializeComponent();
-            articlesLb.ItemsSource = DBManager.ExecuteArticlesToListForComboBox("SELECT name FROM articles", new SQLiteConnection(Properties.Settings.Default.DBConnectionString));
-
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Tick += timer_Tick;
-            timer.Start();
-
-            batchesProvider = new BatchesProvider(1000, 0);
-            AsyncVirtualizingCollection<BatchRecord> batchesList = new AsyncVirtualizingCollection<BatchRecord>(batchesProvider, 1000, 3000);
-            DataGrid2.ItemsSource = batchesList;
         }
 
-        private void timer_Tick(object sender, EventArgs e)
+        private void SwitchToMakeMeasureMode_Checked(object sender, RoutedEventArgs e)
         {
-            tbMemory.Text = string.Format("{0:0.00} MB", GC.GetTotalMemory(true) / 1024.0 / 1024.0);
+            if(SwitchToMakeMeasureMode.IsLoaded==true)
+            {
+                WatchMode.Visibility = Visibility.Collapsed;
+                MakeMeasureMode.Visibility = Visibility.Visible;
+            }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SwitchToWatchMode_Checked(object sender, RoutedEventArgs e)
         {
-         
+            MakeMeasureMode.Visibility = Visibility.Collapsed;
+            WatchMode.Visibility = Visibility.Visible;
+        }
 
+        private void LoadSettings()
+        {
+  
+
+        }
+
+        private void SaveSettings()
+        {
+            Properties.Settings.Default.ArticlesPanelWidth = MakeMeasureMode.column1.Width;
+            Properties.Settings.Default.Save();
+            Debug.WriteLine("Setting Saved");
+            Debug.WriteLine("Width={0}",MakeMeasureMode.column1.Width);
+
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnClosing(e);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            SaveSettings();
+            base.OnClosed(e);
         }
     }
 }

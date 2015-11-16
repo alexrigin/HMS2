@@ -130,6 +130,11 @@ namespace HMS.Managers
             return list;
         }
 
+        public static IList<ArticleRecord> ExecuteArticlesToList()
+        {
+            return ExecuteArticlesToList("SELECT * FROM articles;", new SQLiteConnection(Properties.Settings.Default.DBConnectionString));
+        }
+
         public static IList<string> ExecuteArticlesToListForComboBox(string SqlRequest, SQLiteConnection Connection)
         {
             //StartIndex += 1; // sql starts from 1
@@ -211,13 +216,13 @@ namespace HMS.Managers
             string measurements_table = "CREATE TABLE IF NOT EXISTS measurements "
                 + "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "number integer not null, "
-                + "h1   real not null, "
-                + "th1  time not null, "
-                + "h2   real not null, "
-                + "th2  time not null, "
-                + "d    real not null, "
-                + "td   time not null, "
-                + "bacthe INTEGER not null REFERENCES batches"
+                + "h1   real null, "
+                + "th1  time null, "
+                + "h2   real null, "
+                + "th2  time null, "
+                + "d    real null, "
+                + "td   time null, "
+                + "batch INTEGER not null REFERENCES batches"
                 + ");";
             ExecuteNonQuery(measurements_table, new SQLiteConnection(Properties.Settings.Default.DBConnectionString));
         }

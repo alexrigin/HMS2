@@ -18,7 +18,7 @@ using HMS.Tools;
 using System.Globalization;
 using HMS.Managers;
 
-namespace HMS
+namespace HMS.View
 {
     /// <summary>
     /// Логика взаимодействия для AddArticleWindow.xaml
