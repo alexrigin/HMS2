@@ -1,0 +1,3 @@
+PM> Install-Package MahApps.Metro
+PM> Install-Package MahApps.Metro.Resources
+PM> Install-Package Extended.Wpf.Toolkit
