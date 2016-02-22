@@ -14,6 +14,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +37,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DynamicDataDisplay, Version=0.3.0.1, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicDataDisplay.0.3.0.1\lib\net45\DynamicDataDisplay.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DynamicDataDisplay.Maps, Version=0.1.0.0, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\DynamicDataDisplay.Maps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DynamicDataDisplay.Markers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\DynamicDataDisplay.Markers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DynamicDataDisplay.Markers2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\DynamicDataDisplay.Markers2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ExtendedGrid, Version=2.0.0.21, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\ExtendedGrid.dll</HintPath>
@@ -42,16 +68,58 @@
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.SharePoint.Client, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SharePoint.Client.14.0.4762.1000\lib\Microsoft.SharePoint.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SharePoint.Client.14.0.4762.1000\lib\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.3.5.8\lib\35\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.1.0\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Parser, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
+      <HintPath>..\packages\DynamicDataDisplayWpf.0.4.0\lib\Parser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SerialPortLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SerialPortLib.1.0.11\lib\SerialPortLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Activities" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.SQLite, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.98.1\lib\net451\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.98.1\lib\net451\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.98.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.98.1\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.1.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -64,22 +132,46 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Toolkit.Charting, Version=1.0.5755.26422, Culture=neutral, PublicKeyToken=c475b86b0b5dd5cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolkit.Charting.1.0.5755.26422\lib\net40\Toolkit.Charting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Toolkit.CodeBase, Version=1.0.5755.26406, Culture=neutral, PublicKeyToken=85a1d6861c984571, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolkit.CodeBase.1.0.5755.26406\lib\net35\Toolkit.CodeBase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Toolkit.CommonResources, Version=1.0.5752.28158, Culture=neutral, PublicKeyToken=2899914042019c40, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolkit.CommonResources.1.0.5752.28158\lib\net35\Toolkit.CommonResources.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Toolkit.Data, Version=1.0.5755.26407, Culture=neutral, PublicKeyToken=629543f4dbd6bd87, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolkit.Data.1.0.5755.26407\lib\net35\Toolkit.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Toolkit.Drawing, Version=1.0.5755.26408, Culture=neutral, PublicKeyToken=5ff3c7cbdef8f713, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolkit.Drawing.1.0.5755.26408\lib\net35\Toolkit.Drawing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Toolkit.Runtime, Version=1.0.5755.26410, Culture=neutral, PublicKeyToken=f6792c8416fb80c0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolkit.Runtime.1.0.5755.26410\lib\net35\Toolkit.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Toolkit.Scripting, Version=1.0.5755.26411, Culture=neutral, PublicKeyToken=6616acb562ce6d44, processorArchitecture=MSIL">
+      <HintPath>..\packages\Toolkit.Scripting.1.0.5755.26411\lib\net35\Toolkit.Scripting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.0.2000.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Xceed.Wpf.AvalonDock.dll</HintPath>
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Xceed.Wpf.DataGrid, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Xceed.Wpf.DataGrid.dll</HintPath>
-    </Reference>
-    <Reference Include="Xceed.Wpf.Toolkit, Version=2.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Xceed.Wpf.Toolkit.dll</HintPath>
+    <Reference Include="ZedGraph, Version=5.1.7.430, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZedGraph.5.1.7\lib\net35-Client\ZedGraph.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +179,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command.cs" />
+    <Compile Include="Controls\ARTextBox.xaml.cs">
+      <DependentUpon>ARTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\DateTimeConverter.cs" />
+    <Compile Include="Converters\InvalidValueConverter.cs" />
+    <Compile Include="Converters\IsEnableToBooleanConverter.cs" />
+    <Compile Include="Converters\MakeMeasurementBtnVisibilityConverter.cs" />
+    <Compile Include="DataProviders\BatchesProvider.cs" />
+    <Compile Include="DataRecords\NotifyMeasurementRecord.cs" />
+    <Compile Include="DataRecords\SQLMeasurementRecord.cs" />
+    <Compile Include="DeviceManagerWindow.xaml.cs">
+      <DependentUpon>DeviceManagerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Managers\DeviceManager.cs" />
+    <Compile Include="Managers\ExportManager.cs" />
+    <Compile Include="Managers\InputDevice.cs" />
+    <Compile Include="Managers\MitutoyoRS232InputDevice.cs" />
+    <Compile Include="Managers\RS232InputDevice.cs" />
+    <Compile Include="Managers\SafeSerialPort.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Managers\SerialPortExample.cs" />
+    <Compile Include="ParameterType.cs" />
+    <Compile Include="RelayActionCommand.cs" />
+    <Compile Include="Serial.cs" />
+    <Compile Include="serialportio.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="SimpleCommand.cs" />
+    <Compile Include="SQLQuery\Clauses.cs" />
+    <Compile Include="SQLQuery\Enums.cs" />
+    <Compile Include="SQLQuery\WhereStatement.cs" />
+    <Compile Include="Tools\Log.cs" />
+    <Compile Include="SQLQuery\SQLSelectQuery.cs" />
+    <Compile Include="Tools\Utils.cs" />
+    <Compile Include="ValidationRules\PropertyValidationRule.cs" />
     <Compile Include="View\AddArticleWindow.xaml.cs">
       <DependentUpon>AddArticleWindow.xaml</DependentUpon>
     </Compile>
@@ -98,7 +226,7 @@
     <Compile Include="Temp\DataConverter_boolToVisibility.cs" />
     <Compile Include="Temp\DataConverter_VisibilityToBool.cs" />
     <Compile Include="DataProviders\ArticlesProvider.cs" />
-    <Compile Include="DataProviders\BatchesProvider.cs" />
+    <Compile Include="DataProviders\MeasurementsProvider.cs" />
     <Compile Include="DataRecords\ArticleRecord.cs" />
     <Compile Include="DataRecords\BatchRecord.cs" />
     <Compile Include="DataRecords\MeasurementRecord.cs" />
@@ -109,8 +237,20 @@
     <Compile Include="DataVirtualization\VirtualizingCollection.cs" />
     <Compile Include="Managers\DBManager.cs" />
     <Compile Include="Tools\Tools.cs" />
-    <Compile Include="View\Tabs\HeightTab.xaml.cs">
-      <DependentUpon>HeightTab.xaml</DependentUpon>
+    <Compile Include="View\MeasuringControl.xaml.cs">
+      <DependentUpon>MeasuringControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ParameterControl.xaml.cs">
+      <DependentUpon>ParameterControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ResultView.xaml.cs">
+      <DependentUpon>ResultView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SimpleNewArticleWindow.xaml.cs">
+      <DependentUpon>SimpleNewArticleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MeasurementControl.xaml.cs">
+      <DependentUpon>MeasurementControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -124,6 +264,25 @@
     <Compile Include="Temp\Window2.xaml.cs">
       <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Window3.xaml.cs">
+      <DependentUpon>Window3.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Controls\ARTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeviceManagerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Accents\huhtamaki.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\HuhtamakiControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddArticleWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -137,7 +296,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Tabs\HeightTab.xaml">
+    <Page Include="View\MeasuringControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ParameterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ResultView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SimpleNewArticleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MeasurementControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,6 +329,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Temp\Window2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,7 +357,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="bin\Debug\System.Data.SQLite.dll.config" />
+    <None Include="bin\temp1.db" />
+    <None Include="bin\temp2.db" />
+    <None Include="bin\temp3.db" />
+    <None Include="bin\temp4.db" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -193,48 +375,72 @@
   <ItemGroup>
     <Content Include="bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll" />
     <Content Include="bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll" />
-    <Content Include="bin\Debug\ExtendedGrid.dll" />
-    <Content Include="bin\Debug\Fluent.dll" />
     <Content Include="bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll" />
     <Content Include="bin\Debug\fr\Xceed.Wpf.Toolkit.LiveExplorer.resources.dll" />
     <Content Include="bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll" />
-    <Content Include="bin\Debug\ImagePackage.dll" />
     <Content Include="bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll" />
-    <Content Include="bin\Debug\Microsoft.Office.Interop.Excel.dll" />
-    <Content Include="bin\Debug\MultiEventCommandBinder.dll" />
-    <Content Include="bin\Debug\Office.dll" />
     <Content Include="bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll" />
     <Content Include="bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll" />
     <Content Include="bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll" />
     <Content Include="bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll" />
-    <Content Include="bin\Debug\System.Data.SQLite.dll" />
-    <Content Include="bin\Debug\System.Data.SQLite.EF6.dll" />
-    <Content Include="bin\Debug\System.Data.SQLite.EF6.pdb" />
-    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.dll" />
-    <Content Include="bin\Debug\Xceed.Wpf.AvalonDock.pdb" />
-    <Content Include="bin\Debug\Xceed.Wpf.DataGrid.dll" />
-    <Content Include="bin\Debug\Xceed.Wpf.Toolkit.dll" />
     <Content Include="bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll" />
+    <Content Include="bin\ExtendedGrid.dll" />
+    <Content Include="bin\Fluent.dll" />
+    <Content Include="bin\ImagePackage.dll" />
+    <Content Include="bin\MultiEventCommandBinder.dll" />
+    <Content Include="bin\Xceed.Wpf.DataGrid.dll" />
+    <Content Include="bin\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="License-LGPL.txt" />
+    <Resource Include="Images\huhtamaki_logo.png" />
     <Resource Include="Temp\minusBtn.png" />
     <Resource Include="Temp\plusBtn.bmp" />
     <Resource Include="NuGetCommands.txt" />
     <Resource Include="View\mahapps.metro.logo2.ico" />
     <Resource Include="Resources\Entypo-license.txt" />
     <Resource Include="Resources\WindowsIcons-license.txt" />
-    <Resource Include="View\cup.png" />
-    <Resource Include="bin\Debug\System.Data.SQLite.EF6.xml" />
-    <Content Include="bin\Debug\System.Data.SQLite.Linq.dll" />
-    <Content Include="bin\Debug\System.Data.SQLite.Linq.pdb" />
-    <Resource Include="bin\Debug\System.Data.SQLite.Linq.xml" />
-    <Content Include="bin\Debug\System.Data.SQLite.pdb" />
-    <Resource Include="bin\Debug\System.Data.SQLite.xml" />
+    <Resource Include="Temp\cup.png" />
     <Content Include="bin\Debug\x64\SQLite.Interop.dll" />
     <Content Include="bin\Debug\x64\SQLite.Interop.pdb" />
     <Content Include="bin\Debug\x86\SQLite.Interop.dll" />
     <Content Include="bin\Debug\x86\SQLite.Interop.pdb" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net451\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.98.1\build\net451\System.Data.SQLite.Core.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

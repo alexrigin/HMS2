@@ -4,99 +4,153 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:Tabs="clr-namespace:HMS.View.Tabs"
              mc:Ignorable="d" 
              d:DesignHeight="388" d:DesignWidth="726">
-    <Grid Name="ParentGrid">
-        
+	<UserControl.Resources>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="column0" Width="Auto"/>
-            <ColumnDefinition Name="column1" Width="0.01*"/>
-            <ColumnDefinition Name="column2" Width="Auto"/>
-            <ColumnDefinition Name="column3" MinWidth="100" Width="100*" />
-        </Grid.ColumnDefinitions>
+		<Style x:Key="lv_style" TargetType="{x:Type ListView}" BasedOn="{StaticResource MetroListView}">
+			<Setter Property="Margin" Value="10,10,10,10"/>
+			<Setter Property="SelectionMode" Value="Single"/>
+			<Setter Property="IsSynchronizedWithCurrentItem" Value="True"/>
+			<Setter Property="RenderOptions.ClearTypeHint" Value="Enabled"/>
+			<Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+			<Setter Property="ItemContainerStyle" Value="{StaticResource HuhtamakiListViewItemStyle}"/>
+		</Style>
 
-        
+		<Style x:Key="gb_style" TargetType="GroupBox" BasedOn="{StaticResource MetroGroupBox}">
+			<Setter Property="Background" Value="{StaticResource HighlightBrush}"/>
+			<Style.Triggers>
+				<Trigger Property="HasContent" Value="true">
+					<Setter Property="Background" Value="{StaticResource DarkBlueColorBrush}"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
 
-        <StackPanel Grid.Column="0" Name="buttonBar" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0">
-            <StackPanel.LayoutTransform>
-                <RotateTransform Angle="90"/>
-            </StackPanel.LayoutTransform>
-            <ToggleButton Name="ArticlesPanelBtn" Content="Артикулы" Click="ArticlesPanelBtn_Click" Margin="5,0,0,5" />
-        </StackPanel>
+	</UserControl.Resources>
+	<Grid Name="ParentGrid">
 
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Name="column0" Width="Auto"/>
+			<ColumnDefinition Name="column1" Width="Auto"/>
+			<ColumnDefinition Name="column2" Width="Auto"/>
+			<ColumnDefinition Name="column3" Width="*" MinWidth="50"/>
+		</Grid.ColumnDefinitions>
 
-        <Grid Name="MainArea" Grid.Column="3">
-            <!-- Define four rows: -->
-            <GroupBox Header="Измерения"  Margin="5">
-                <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="MainTabControl" TabStripPlacement="Top" BorderThickness="3" BorderBrush="black">
-                    <TabItem Header="Диаметр" >
-                        <Grid Background="Azure">
-                            <Tabs:HeightTab x:Name="HeightTab" DataContext="{Binding}" Visibility="Visible"/>
-                        </Grid>
-                    </TabItem>
-
-                    <TabItem Header="Высота">
-                        <Grid Background="Yellow">
-
-                        </Grid>
-                    </TabItem>
-
-                    <TabItem Header="Высота закатки" Controls:ControlsHelper.HeaderFontSize="30">
-
-                        <Grid Background="Red">
-
-                        </Grid>
-                    </TabItem>
-
-                </Controls:MetroAnimatedSingleRowTabControl>
-            </GroupBox>
-        </Grid>
+		<StackPanel Grid.Column="0" Name="buttonBar" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+			<StackPanel.LayoutTransform>
+				<RotateTransform Angle="90"/>
+			</StackPanel.LayoutTransform>
+			<ToggleButton Name="ArticlesPanelBtn" Content="Артикулы" Click="ArticlesPanelBtn_Click" Margin="0,0,0,5" />
+		</StackPanel>
 
 
-        <Grid Name="ArticlesPanel" Grid.Column="1" Visibility="Collapsed">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
+		<Grid Name="MainArea" Grid.Column="3" Margin="0,0,5,5" Background="{StaticResource HighLightGrayColorBrush}">
+			<!-- Define four rows: -->
+			<GroupBox Name="MeasurementsGroupBox" Header="Измерения" Margin="0" Padding="5" Focusable="True" Style="{DynamicResource gb_style}"/>
 
 
-            <GroupBox Header="Артикулы">
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+		</Grid>
 
-                    <DockPanel Grid.Row="0">
-                        <!--Button Width="26" Name="ArticlesPanelPin" DockPanel.Dock="Right" Click="ArticlesPanelPin_Click" Background="White">
-                        <Image Name="pane1PinImage" Source="pinHorizontal.gif"/>
-                    </-->
-                        <!--TextBlock Padding="8" TextTrimming="CharacterEllipsis" Foreground="Black" DockPanel.Dock="Left"></-->
-                    </DockPanel>
-                    <ListView x:Name="articles_dg"  Grid.Row="1" Margin="5,5,5,5" MouseDoubleClick="articles_dg_MouseDoubleClick" >
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
 
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
+		<Grid Name="ArticlesPanel" Grid.Column="1" Width="Auto" Visibility="Visible" 
+			  Background="{StaticResource HighLightGrayColorBrush}" Margin="0,0,0,5">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition Width="auto"/>
+			</Grid.ColumnDefinitions>
 
-                                    <TextBlock FontWeight="Bold" Text="{Binding Path=Name}" />
-                                    <TextBlock Grid.Row="1" Text="{Binding Path=Number}" />
 
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </GroupBox>
-        </Grid>
+			<GroupBox Header="Артикулы" Background="{StaticResource BlueColor2Brush}"  Margin="0,0,0,0"  Padding="5" >
+				<Grid Grid.Column="0">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
 
-        <GridSplitter Name="gs" Width="5" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ResizeBehavior="PreviousAndNext" Visibility="Collapsed" />
+					<TextBox Name="SearchBox"
+						     Margin="0,0,0,0"
+							 Controls:TextBoxHelper.Watermark="Поиск..."
+							 Controls:TextBoxHelper.UseFloatingWatermark="True"
+							 Controls:TextBoxHelper.ClearTextButton="True"
+							 Controls:TextBoxHelper.ButtonCommand="{Binding TextBoxButtonCmd, Mode=OneWay}"
+							 TextChanged="TextBox_TextChanged"
+							 FontSize="16"
+							 Background="{StaticResource HighLightGrayColorBrush}"
+							 >
+						<TextBox.Style>
+							<Style TargetType="{x:Type TextBox}" 
+								   BasedOn="{StaticResource SearchMetroTextBox}">
+								<Style.Triggers>
+									<Trigger Property="Controls:TextBoxHelper.HasText"
+											 Value="true">
+										<Setter Property="Controls:TextBoxHelper.ButtonTemplate"
+												Value="{DynamicResource ChromelessButtonTemplate}"/>
+									</Trigger>
+								</Style.Triggers>
 
-    </Grid>
+							</Style>
+						</TextBox.Style>
+					</TextBox>
+
+					<!--Articles ListView -->
+					<ListView x:Name="articles_lv"  Grid.Row="1" Margin="0,0,0,0" 
+							  MouseDoubleClick="articles_dg_MouseDoubleClick" 
+							  Style="{StaticResource lv_style}"
+							  Background="{StaticResource HighLightGrayColorBrush}">
+
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition/>
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+
+									<TextBlock FontWeight="Bold" 
+											   Margin="5,2,5,5"
+											   
+											   HorizontalAlignment="Left"
+											   Text="{Binding Path=Name}"  />
+									<TextBlock Grid.Row="1"
+											   Margin="5,2,5,5"
+											   HorizontalAlignment="Left"
+											   Text="{Binding Path=Number}" />
+								</Grid>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+
+					</ListView>
+				</Grid>
+			</GroupBox>
+		</Grid>
+
+		<GridSplitter Name="gs"  Grid.Column="2" Width="5"
+					  ResizeDirection="Columns"  
+					  HorizontalAlignment="Stretch" 
+					  ResizeBehavior="PreviousAndNext"  
+					  Visibility="Visible"  
+					  DragCompleted="gs_DragCompleted" 
+					  Background="#FFF"/>
+	</Grid>
 </UserControl>
+
+
+<!--ListView.ItemContainerStyle>
+	<Style TargetType="{x:Type ListViewItem}">
+		<Setter Property="Background" Value="LightSteelBlue"/>
+		<Style.Triggers>
+			<MultiDataTrigger>
+				<MultiDataTrigger.Conditions>
+					<Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" 
+												Value="true" />
+				</MultiDataTrigger.Conditions>
+				<Setter Property="Background"
+											Value="{StaticResource TurquoiseColorBrush}"/>
+				<Setter Property="Foreground"
+											Value="{StaticResource MediumGrayCololorBrush}"/>
+			</MultiDataTrigger>
+		</Style.Triggers>
+
+	</Style>
+</ListView.ItemContainerStyle> -->
+

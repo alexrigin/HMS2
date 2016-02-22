@@ -1,0 +1,224 @@
+﻿<Controls:MetroWindow x:Class="HMS.View.SimpleNewArticleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:vr="clr-namespace:HMS.ValidationRules"              
+        xmlns:Views="clr-namespace:HMS.View"
+        Title="Новый артикул" 
+        Height="Auto" Width="Auto"
+        ShowTitleBar="True"
+        Icon="mahapps.metro.logo2.ico"
+        ShowIconOnTitleBar="False"
+        ShowCloseButton="True"
+        BorderThickness="0" 
+        GlowBrush="Black"
+        WindowTransitionsEnabled="False"
+        WindowStartupLocation="CenterScreen"
+		SizeToContent="WidthAndHeight"
+					  ResizeMode="NoResize"
+					  MinHeight="300"
+					  MinWidth="600"
+					  >
+	<Controls:MetroWindow.Resources>
+		<ResourceDictionary>
+			<Style x:Key="CreateBtnStyle" 
+			   BasedOn="{StaticResource SquareButtonStyle}" 
+			   TargetType="{x:Type Button}">
+				<Setter Property="Background" 
+					Value="{DynamicResource BlueColor2Brush}" />
+				<Setter Property="Foreground" 
+					Value="{DynamicResource IdealForegroundColorBrush}" />
+			</Style>
+
+			<Style x:Key="tbstyle" TargetType="TextBox" BasedOn="{StaticResource MetroTextBox}">
+				<Setter Property="Controls:TextBoxHelper.UseFloatingWatermark" Value="True"/>
+				<Setter Property="HorizontalAlignment" Value="Stretch"/>
+				<Setter Property="VerticalAlignment" Value="Stretch"/>
+				<Setter Property="FontSize" Value="18"/>
+				<Setter Property="Margin" Value="5"/>
+				<Setter Property="Controls:TextBoxHelper.ClearTextButton" Value="True"/>
+			</Style>
+		</ResourceDictionary>
+	</Controls:MetroWindow.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Grid.CommandBindings>
+			<CommandBinding Command="New" CanExecute="Confirm_CanExecute" Executed="Confirm_Executed" />
+		</Grid.CommandBindings>
+
+		<Grid Grid.Row="0" >
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0" Margin="10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				
+				<TextBlock Text="Название артикула"  
+						   Grid.Row="0" Grid.Column="0" 
+						   HorizontalAlignment="Stretch" 
+						   VerticalAlignment="Stretch" 
+						   FontSize="18" 
+						   FontWeight="ExtraBold"/>
+				<TextBox Name="Name"
+						 Grid.Row="0" Grid.Column="1"  
+						 Validation.Error="Validation_Error"
+						 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=ArticleName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+						 HorizontalAlignment="Stretch" 
+						 VerticalAlignment="Stretch" 
+						 FontSize="18"  
+						 Margin="5,0,0,5"  
+						 Controls:TextBoxHelper.Watermark="Название..." 
+						 TextAlignment="Center"/>
+				<TextBlock Text="Номер артикула"
+						   Grid.Row="1" Grid.Column="0"
+						   HorizontalAlignment="Stretch"
+						   VerticalAlignment="Stretch"
+						   FontSize="18" 
+						   FontWeight="ExtraBold"/>
+				<TextBox Name="Number" 
+						 Validation.Error="Validation_Error"
+						 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=ArticleNumber, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+						 Grid.Row="1" Grid.Column="1" 
+						 HorizontalAlignment="Stretch" 
+						 VerticalAlignment="Stretch" 
+						 FontSize="18"  
+						 Margin="5,0,0,0"  
+						 Controls:TextBoxHelper.Watermark="Номер..." 
+						 TextAlignment="Center" 
+						 KeyDown="Number_KeyDown"
+						 />
+
+			</Grid>
+
+			<GroupBox Header="Размеры" Margin="5" Grid.Row="1" Background="{StaticResource BlueColorBrush}"> 
+				<Grid Background="{StaticResource HighLightGrayColorBrush}">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+
+
+					<!--Diameter-->
+					<TextBlock Text="Диаметр" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="18" FontWeight="ExtraBold"/>
+					<TextBox Name="MinD"
+							 Grid.Row="1" Grid.Column="0"
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=MinDiameter, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+							 Style="{StaticResource tbstyle}" 
+							 Controls:TextBoxHelper.Watermark="Min" />
+					<TextBox Name="NominalD"
+							 Grid.Row="1" Grid.Column="1"
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=NominalDiameter, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+							 Style="{StaticResource tbstyle}" 
+							 Controls:TextBoxHelper.Watermark="Nominal" />
+					<TextBox Name="MaxD"
+							 Grid.Row="1" Grid.Column="2"
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=MaxDiameter, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+							 Style="{StaticResource tbstyle}"  
+							 Controls:TextBoxHelper.Watermark="Max"/>
+
+					<!--Height-->
+					<TextBlock Text="Высота" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="18" FontWeight="ExtraBold"/>
+					<TextBox Name="MinH"
+							 Grid.Row="3" Grid.Column="0" 
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=MinAHeight, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+							 Style="{StaticResource tbstyle}"  
+							 Controls:TextBoxHelper.Watermark="Min"/>
+					<TextBox Name="NominalH"
+							 Grid.Row="3" Grid.Column="1"
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=NominalHeight, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
+							 Style="{StaticResource tbstyle}" 
+							 Controls:TextBoxHelper.Watermark="Nominal" />
+					<TextBox Name="MaxH"
+							 Grid.Row="3" Grid.Column="2"
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=MaxAHeight, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+							 Style="{StaticResource tbstyle}"  
+							 Controls:TextBoxHelper.Watermark="Max"/>
+					
+					<!--SeamerHeight-->
+					<TextBlock Text="Высота закатки" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="18" FontWeight="ExtraBold"/>
+					<TextBox Name="MinSH"
+							 Grid.Row="5" Grid.Column="0"
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=MinSeamerHeight, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+							 Style="{StaticResource tbstyle}" 
+							 Controls:TextBoxHelper.Watermark="Min"/>
+					<TextBox Name="NominalSH"
+							 Grid.Row="5" Grid.Column="1"
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=NominalSeamerHeight,ValidatesOnDataErrors=true, NotifyOnValidationError=true}" 
+							 Style="{StaticResource tbstyle}" 
+							 Controls:TextBoxHelper.Watermark="Nominal" />
+					<TextBox Name="MaxSH"
+							 Grid.Row="5" Grid.Column="2" 
+							 Validation.Error="Validation_Error"
+							 Text="{Binding UpdateSourceTrigger=PropertyChanged, Path=MaxSeamerHeight, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+							 Style="{StaticResource tbstyle}"  
+							 Controls:TextBoxHelper.Watermark="Max"/>
+					
+				</Grid>
+
+			</GroupBox>
+
+		</Grid>
+
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Name="OkBtn" 
+					Content="Создать" 
+					Grid.Column="2" 
+					Margin="0,5,5,10" 
+					TextBlock.FontSize="20" 
+					Style="{StaticResource CreateBtnStyle}"
+					Controls:ButtonHelper.PreserveTextCase="True"
+					FontWeight="ExtraBold"
+					Command="New"/>
+			<Button Name="CloseBtn" 
+					Content="Отмена" 
+					Grid.Column="3" 
+					Margin="5,5,10,10" 
+					TextBlock.FontSize="20" 
+					Click="CloseBtn_Click" 
+					Style="{StaticResource SquareButtonStyle}"
+					Controls:ButtonHelper.PreserveTextCase="True"
+					FontWeight="Regular"/>
+
+		</Grid>
+
+	</Grid>
+</Controls:MetroWindow>

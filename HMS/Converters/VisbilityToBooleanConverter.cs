@@ -17,13 +17,23 @@ namespace HMS.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return (Visibility)value == Visibility.Visible;
-        }
+			bool bValue = (bool)value;
+			if (bValue)
+				return Visibility.Visible;
+			else
+				return Visibility.Hidden;
+
+		}
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return (bool)value ? Visibility.Visible : Visibility.Collapsed;
-        }
+			Visibility visibility = (Visibility)value;
+
+			if (visibility == Visibility.Visible)
+				return true;
+			else
+				return false;
+		}
 
         #endregion
     }

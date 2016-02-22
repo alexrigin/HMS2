@@ -5,97 +5,104 @@
     xmlns:Sys="clr-namespace:System;assembly=mscorlib"
 	 Height="300" SizeToContent="Width" >
 
-    <Window.Resources>
+	<Window.Resources>
+		<Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+			<Setter Property="SnapsToDevicePixels" Value="true" />
+			<Setter Property="OverridesDefaultStyle" Value="true" />
+			<Setter Property="IsTabStop" Value="false" />
+			<Setter Property="Focusable" Value="false" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="RepeatButton">
+						<Border Background="Transparent"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 
-        <ResourceDictionary>
+		<Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+			<Setter Property="SnapsToDevicePixels" Value="true" />
+			<Setter Property="OverridesDefaultStyle" Value="true" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="RepeatButton">
+						<Border SnapsToDevicePixels="True" Background="YellowGreen"  BorderThickness="1" BorderBrush="YellowGreen" Height="3"/>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style x:Key="SliderThumb" TargetType="Thumb">
+			<Setter Property="SnapsToDevicePixels" Value="true" />
+			<Setter Property="OverridesDefaultStyle" Value="true" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Thumb">
+						<StackPanel Orientation="Vertical">
+							<Path Data="M 0 0 L 8 0 L 4 6 Z"  Stroke="YellowGreen" Margin="-2,0,0,0" StrokeThickness="2" Fill="YellowGreen"></Path>
+							<Line X1="0" Y1="0" X2="0" Y2="7" Stroke="Gray" StrokeThickness="1" Margin="2,0,0,0" StrokeDashArray="1.5,1.5"></Line>
+							<TextBlock Foreground="Black" Margin="-2,30,0,0"  Text="{Binding Value, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Slider}}}"/>
+						</StackPanel>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<ControlTemplate x:Key="Slider"  TargetType="Slider">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+				<TickBar  x:Name="TopTick"  Fill="LightGray" VerticalAlignment="Top"   SnapsToDevicePixels="True" Grid.Row="0" Placement="Top" Height="5" Visibility="Visible"/>
+				<Border BorderBrush="LightGray"  BorderThickness="0,0,0,1" ></Border>
+				<Border x:Name="TrackBackground" VerticalAlignment="Center" Margin="0,-10,0,0" BorderBrush="Red" Background="Red" Height="3"   Grid.Row="1"  BorderThickness="1"/>
+				<Track Grid.Row="1" x:Name="PART_Track" Margin="0,-10,0,0"  >
+					<Track.DecreaseRepeatButton>
+						<RepeatButton Style="{StaticResource SliderRepeatButton1}"  Command="Slider.DecreaseLarge" />
+					</Track.DecreaseRepeatButton>
+					<Track.Thumb>
+						<Thumb Style="{StaticResource SliderThumb}" Margin="0,-20,0,0" />
+					</Track.Thumb>
+					<Track.IncreaseRepeatButton>
+						<RepeatButton Style="{StaticResource SliderRepeatButton}" Command="Slider.IncreaseLarge" />
+					</Track.IncreaseRepeatButton>
+				</Track>
+				<TextBlock Text="0" Grid.Row="1" Margin="0,15,0,0"></TextBlock>
+				<TickBar x:Name="BottomTick" Fill="LightGray"   SnapsToDevicePixels="True" Grid.Row="2"   Placement="Bottom" Height="4" Visibility="Collapsed" />
+			</Grid>
+			<ControlTemplate.Triggers>
+				<Trigger Property="TickPlacement"  Value="TopLeft">
+					<Setter TargetName="TopTick" Property="Visibility"  Value="Visible" />
+				</Trigger>
+				<Trigger Property="TickPlacement" Value="BottomRight">
+					<Setter TargetName="BottomTick"  Property="Visibility"  Value="Visible" />
+				</Trigger>
+				<Trigger Property="TickPlacement" Value="Both">
+					<Setter TargetName="TopTick" Property="Visibility" Value="Visible" />
+					<Setter TargetName="BottomTick" Property="Visibility" Value="Visible" />
+				</Trigger>
+			</ControlTemplate.Triggers>
+		</ControlTemplate>
+
+		<Style x:Key="Horizontal_Slider" TargetType="Slider">
+			<Setter Property="Focusable" Value="False"/>
+			<Setter Property="SnapsToDevicePixels" Value="true" />
+			<Setter Property="OverridesDefaultStyle" Value="true" />
+			<Style.Triggers>
+				<Trigger Property="Orientation" Value="Horizontal">
+					<Setter Property="MinHeight" Value="21" />
+					<Setter Property="MinWidth" Value="104" />
+					<Setter Property="Template" Value="{StaticResource Slider}" />
+				</Trigger>
+			</Style.Triggers>
+		</Style>
 
 
-            <SolidColorBrush x:Key="ButtonBorder" Color="#FF003C74"/>
-            <Style x:Key="ToggleButtonStyle" TargetType="{x:Type ToggleButton}">
- 
-                <Setter Property="Background" Value="Aqua"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ToggleButton}">
-                            <Grid>
-                                <Image x:Name="PlusLogo" Stretch="UniformToFill" Source="plusBtn.bmp">
-                                    <Image.Visibility>
-                                        <Binding Path="IsChecked" RelativeSource="{RelativeSource TemplatedParent}">
-                                            <Binding.Converter>
-                                                <local:DataConverter_boolToVisibility FalseToVisibility="Visible"   />
-                                            </Binding.Converter>
-                                        </Binding>
-                                    </Image.Visibility>
-                                </Image>
-                                <Image x:Name="MinusLogo" Stretch="UniformToFill" Source="minusBtn.png" >
-                                    <Image.Visibility>
-                                        <Binding Path="IsChecked" RelativeSource="{RelativeSource TemplatedParent}">
-                                            <Binding.Converter>
-                                                <local:DataConverter_boolToVisibility FalseToVisibility="Hidden" />
-                                            </Binding.Converter>
-                                        </Binding>
-                                    </Image.Visibility>
-                                </Image>
-                            </Grid>
-                            
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+	</Window.Resources>
+	<Slider Style="{StaticResource Horizontal_Slider}" VerticalAlignment="Center" TickFrequency="37.5" Minimum="0" Maximum="600" Value="500" Width="300" Margin="50,0,50,0"></Slider>
 
-
-
-            <Style x:Key="DataGridRowHeaderStyle" TargetType="{x:Type DataGridRowHeader}">
-                <Setter Property="ContentTemplate">
-                    <Setter.Value>
-                        <DataTemplate>
-                            <ToggleButton Style="{StaticResource ToggleButtonStyle}" Width="12" Height="12" >
-                                <ToggleButton.IsChecked>
-                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type DataGridRow}}" Path="DetailsVisibility" Mode="TwoWay"  >
-                                        <Binding.Converter>
-                                            <local:DataConverter_VisibilityToBool FalseToVisibility="Collapsed" />
-                                        </Binding.Converter>
-                                    </Binding>
-                                </ToggleButton.IsChecked>
-                            </ToggleButton>
-                        </DataTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <DataTemplate x:Key="RowDetailsTemplate">
-                <Grid Background="LightBlue">
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <TextBlock Text="RowDetails Go here"  Grid.Row="0"/>
-                </Grid>
-
-            </DataTemplate>
-        </ResourceDictionary>
-    </Window.Resources>
-
-    <DataGrid Name="dg" IsSynchronizedWithCurrentItem="True"
-                 EnableColumnVirtualization="True"
-               HeadersVisibility="All"
-                      Width="507"
-                      RowBackground="Wheat" 
-                      RowHeaderWidth="25" 
-                      RowHeight="22"
-                      RowHeaderStyle="{DynamicResource DataGridRowHeaderStyle}"
-                      RowDetailsTemplate="{DynamicResource RowDetailsTemplate}"
-                      RowDetailsVisibilityMode="Collapsed">
-
-    </DataGrid>
-
-</Window>
+	</Window>
 
 

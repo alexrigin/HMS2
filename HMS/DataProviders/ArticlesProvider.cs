@@ -30,7 +30,7 @@ namespace HMS.DataProviders
         {
             _count = count;
             _fetchDelay = fetchDelay;
-            _sqlRequest = new SQLRequest("*", "articles", "", "", "");
+            _sqlRequest = new SQLRequest("*", "articles", "", "", "", "");
         }
 
         /// <summary>
@@ -40,10 +40,10 @@ namespace HMS.DataProviders
         public int FetchCount()
         {
             Trace.WriteLine("FetchCount");
-            _countRequest = string.Format("SELECT COUNT(id) FROM articles {0};",_sqlRequest.WherePart);
+            _countRequest = string.Format("SELECT COUNT(id) FROM articles {0};", _sqlRequest.WherePart);
             Debug.WriteLine(_countRequest);
             _count = Convert.ToInt32(DBManager.ExecuteScalar(_countRequest, new SQLiteConnection(_dbConnectionString)));
-            Debug.WriteLine("count= "+_count);
+            Debug.WriteLine("count= " + _count);
             return _count;
         }
 
@@ -56,7 +56,27 @@ namespace HMS.DataProviders
             int EndIndex = startIndex + pageCount;
             _sqlRequest.SetLimit(startIndex, EndIndex);
             Debug.WriteLine(_sqlRequest.SqlRequestString());
-            return DBManager.ExecuteArticlesToList(_sqlRequest.SqlRequestString(), new SQLiteConnection(_dbConnectionString));
+            return DataManager.ExecuteToList<ArticleRecord>(_sqlRequest.SqlRequestString(), new SQLiteConnection(_dbConnectionString), GetData);
+        }
+
+        public ArticleRecord GetData(SQLiteDataReader r)
+        {
+
+            return (new ArticleRecord()
+            {
+                Id = Convert.ToInt32(r["id"].ToString()),
+                Name = r["name"].ToString(),
+                Number = r["number"].ToString(),
+                //NominalDiameter = Convert.ToDouble(r["nominald"]),
+                MinDiameter = Convert.ToDouble(r["mind"]),
+                MaxDiameter = Convert.ToDouble(r["maxd"]),
+                //NominalHeight = Convert.ToDouble(r["nominalh"]),
+                MinHeight = Convert.ToDouble(r["minh"]),
+                MaxHeight = Convert.ToDouble(r["maxh"]),
+                //NominalSeamerHeight = Convert.ToDouble(r["nominalsh"]),
+                MinSeamerHeight = Convert.ToDouble(r["minsh"]),
+                MaxSeamerHeight = Convert.ToDouble(r["maxsh"])
+            });
         }
 
         /// <summary>
@@ -82,7 +102,7 @@ namespace HMS.DataProviders
 
         public void RemoveFilter(string filter)
         {
-            _sqlRequest.RemoveFilter(filter); 
+            _sqlRequest.RemoveFilter(filter);
         }
     }
 }

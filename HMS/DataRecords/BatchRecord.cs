@@ -4,55 +4,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Data.SQLite;
+using HMS.Managers;
+using HMS.DataProviders;
+using HMS.DataVirtualization;
 
 namespace HMS.DataRecords
 {
+    /// <summary>
+    /// Модель данных для отображения в UI (DataGrid, ListView, etc.)
+    /// </summary>
     public class BatchRecord
     {
-        private int _id;
-        private int _articleId;
-        private string _articleName;
-        private DateTime _date;
-        
+
+        protected int? _id;
+        protected int? _articleId;
+        protected string _articleName;
+        protected string _articleNumber;
+        protected DateTime _date;
+        protected int? _batchNumber;
+        protected IList<MeasurementRecord> _measurements;
+        //private MeasurementsProvider _measuremetnsProvider;
+        //AsyncVirtualizingCollection<MeasurementRecord> _measurementsCollection;
+        protected bool _isMeasurementsLoaded = false; 
+
+
         /// <summary>
         /// Идентификатор записи
         /// </summary>
-        public int Id { get { return _id; } set { _id = value; } }
+        public int? Id { get { return _id; } set { _id = value; } }
         /// <summary>
-        /// Идентификатор артикула
+        /// Индентификатор артикула
         /// </summary>
-        public int ArticleId { get { return _articleId; } set { _articleId = value; } }
+        public int? ArticleId { get { return _articleId; } set { _articleId = value; } }
+        /// <summary>
+        /// Дата замера
+        /// </summary>
+        public DateTime Date { get { return _date; } set { _date = value; } }
         /// <summary>
         /// Название артикула
         /// </summary>
-        public String ArticleName { get { return _articleName; } set { _articleName = value; } }
+        public string ArticleName { get { return _articleName; } set { _articleName = value; } }
         /// <summary>
-        /// Дата
+        /// Номер артикула
         /// </summary>
-        public DateTime Date { get { return _date; } set { _date = value; } }
-        
-        public BatchRecord(int Id, int ArticleId, String ArticleName, DateTime Date)
+        public string ArticleNumber { get { return _articleNumber; } set { _articleNumber = value; } }
+        /// <summary>
+        /// Номер партии
+        /// </summary>
+        public int? BatchNumber { get { return _batchNumber; } set { _batchNumber = value; } }
+        /// <summary>
+        /// Список измерений
+        /// </summary>
+        public IList<MeasurementRecord> Measurements
         {
-            _id = Id;
-            _articleId = ArticleId;
-            _articleName = ArticleName;
-            _date = Date;
+            get
+            {
+                if (!_isMeasurementsLoaded) // данные загружаются только один раз
+                {
+                    //_measuremetnsProvider = new MeasurementsProvider(50, 0, BatchNumber);
+                    //_measurementsCollection = new AsyncVirtualizingCollection<MeasurementRecord>(_measuremetnsProvider, 1000, 3000);
+                     _measurements = DataManager.ExecuteToList<MeasurementRecord>(string.Format("SELECT h,htime,sh,shtime,d,dtime from measurements where batchnumber={0};",BatchNumber), 
+                         new SQLiteConnection(Properties.Settings.Default.DBConnectionString), DataManager.ReadMeasurement);
+                    _isMeasurementsLoaded = true;
+                }
+                return _measurements;
+            }
+            set
+            {
+                _measurements = value;
+            }
         }
 
-        public BatchRecord(int ArticleId, String ArticleName, DateTime Date) :
-            this(-1,ArticleId, ArticleName,Date)
-        {
-
-        }
-
-        public override string ToString()
-        {
-            return string.Format("{0},{1},{2},{3};",Id,ArticleId,ArticleName,Date.ToString());
-        }
-
-        public string ToSqlString()
-        {
-            return string.Format(string.Format("{0},{1},'{2}','{3}';", Id, ArticleId, ArticleName, Date.ToString(CultureInfo.GetCultureInfo("en-US"))));
-        }
     }
 }

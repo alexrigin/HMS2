@@ -4,31 +4,63 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+			 xmlns:Toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             xmlns:local="clr-namespace:HMS" 
              mc:Ignorable="d" 
-             d:DesignHeight="371" d:DesignWidth="683">
-    <Grid Name="ParentGrid">
+             d:DesignHeight="600" d:DesignWidth="683">
+	<UserControl.Resources>
+		<ResourceDictionary>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="column0" MinWidth="100" Width="*"/>
-            <ColumnDefinition Name="column1" Width="Auto"/>
-            <ColumnDefinition Name="column2" Width="Auto"/>
-            <ColumnDefinition Name="column3" Width="Auto"/>
-        </Grid.ColumnDefinitions>
+			<Style x:Key="dgstyle" TargetType="DataGrid" BasedOn="{StaticResource MetroDataGrid}">
 
-        <StackPanel Name="ButtonBar" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+			</Style>
+
+			<DataTemplate x:Key="RowDetailsTemplate">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Path=Data.Measurements}" IsReadOnly="True" ScrollViewer.CanContentScroll="True"  IsEnabled="True">
+						<DataGrid.Columns>
+							<DataGridTextColumn Binding="{Binding Path=Data.Height}" Header="Height" FontWeight="Bold"/>
+							<DataGridTextColumn Binding="{Binding Path=Data.HTime}" Header="HTime" FontWeight="Bold"/>
+							<DataGridTextColumn Binding="{Binding Path=Data.SeamerHeight}" Header="SeameerHeight" FontWeight="Bold"/>
+							<DataGridTextColumn Binding="{Binding Path=Data.SHTime}" Header="SHTime" FontWeight="Bold"/>
+							<DataGridTextColumn Binding="{Binding Path=Data.Diameter}" Header="Diameter" FontWeight="Bold"/>
+							<DataGridTextColumn Binding="{Binding Path=Data.DTime}" Header="DTime" FontWeight="Bold"/>
+
+						</DataGrid.Columns>
+					</DataGrid>
+
+					<!--TextBlock Text="RowDetails Go here"  Grid.Row="0"/-->
+				</Grid>
+
+			</DataTemplate>
+		</ResourceDictionary>
+
+	</UserControl.Resources>
+	<Grid Name="ParentGrid">
+
+		<!--Grid.ColumnDefinitions>
+			<ColumnDefinition Name="column0" MinWidth="100" Width="*"/>
+			
+		</-->
+
+		<!--StackPanel Name="ButtonBar" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
             <StackPanel.LayoutTransform>
                 <RotateTransform Angle="90"/>
             </StackPanel.LayoutTransform>
             <ToggleButton  Name="FiltersPanelBtn" Content="Фильтры" Click="FiltersPanelBtn_Click" Margin="0,0,0,0" />
-        </StackPanel>
+        </-->
 
-        <Grid Name="MainArea" Grid.Column="0">
-            <!-- Define four rows: -->
-            <GroupBox Header="Таблицы"  Margin="5">
-                <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="MainTabControl" TabStripPlacement="Top" Margin="0,0,0,0" MinWidth="100" >
-                    <TabItem Header="Артикулы" Controls:ControlsHelper.HeaderFontSize="25">
-                        <Grid>
-                            <DataGrid Name="articles_dg" 
+		<Grid Name="MainArea">
+			<!-- Define four rows: -->
+			<GroupBox Header="Таблицы"  Margin="5">
+				<Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="MainTabControl" TabStripPlacement="Top" Margin="0,0,0,0" MinWidth="100" >
+					<TabItem Header="Артикулы" Controls:ControlsHelper.HeaderFontSize="25">
+						<Grid>
+							<DataGrid Name="articles_dg" 
                                 SelectionMode="Single"
                                 IsReadOnly="True"
                                 Grid.Row="3"
@@ -42,29 +74,35 @@
                                 TextOptions.TextFormattingMode="Display"
                                 SelectionUnit="FullRow">
 
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding Path=Id}" Header="Id" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=Name}" Header="Name" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=Number}" Header="Number" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=MinHeight}" Header="MinH1" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=MaxHeight}" Header="MaxH1" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=MinSeamerHeight}" Header="MinH2" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=MaxSeamerHeight}" Header="MaxH2" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=MinDiameter}" Header="MinD" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=MaxDiameter}" Header="MaxD" FontWeight="Bold"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Grid>
+								<DataGrid.Columns>
+									<DataGridTextColumn Binding="{Binding Path=Id}" Header="Id" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=Name}" Header="Name" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=Number}" Header="Number" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=MinHeight}" Header="MinH1" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=MaxHeight}" Header="MaxH1" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=MinSeamerHeight}" Header="MinH2" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=MaxSeamerHeight}" Header="MaxH2" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=MinDiameter}" Header="MinD" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=MaxDiameter}" Header="MaxD" FontWeight="Bold"/>
+								</DataGrid.Columns>
+							</DataGrid>
+						</Grid>
 
-                    </TabItem>
+					</TabItem>
 
-                    <TabItem Header="Измерения">
-                        <Grid Background="Azure">
-                            <DataGrid Name="measurements_dg" 
+					<TabItem Header="Измерения">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="0.6*"/>
+								<ColumnDefinition Width="auto"/>
+								<ColumnDefinition Width="0.4*"/>
+							</Grid.ColumnDefinitions>
+
+							<DataGrid Name="measurements_dg" Grid.Column="0" 
+                                HeadersVisibility="All"
                                 SelectionMode="Single"
                                 IsReadOnly="True"
                                 Grid.Row="3"
-                                Grid.Column="2"
                                 Margin="10,10,10,10"
                                 ItemsSource="{Binding}"
                                 AutoGenerateColumns="False"
@@ -72,48 +110,133 @@
                                 IsSynchronizedWithCurrentItem="True"
                                 RenderOptions.ClearTypeHint="Enabled"
                                 TextOptions.TextFormattingMode="Display"
-                                SelectionUnit="FullRow">
+                                SelectionUnit="FullRow"
+                                RowDetailsTemplate="{DynamicResource RowDetailsTemplate}">
+								<DataGrid.Columns>
+									<DataGridTemplateColumn>
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<Button Content="+" Click="HandleExpandCollapseForRow"/>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
 
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding Path=Data.Id}" Header="Id" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=Data.ArticleId}" Header="ArticleID" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=Data.ArticleName}" Header="ArticleName" FontWeight="Bold"/>
-                                    <DataGridTextColumn Binding="{Binding Path=Data.Date}" Header="Date" FontWeight="Bold"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
+									<DataGridTextColumn Binding="{Binding Path=Data.Id}" Header="Id" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=Data.ArticleId}" Header="ArticleID" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=Data.ArticleName}" Header="ArticleName" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=Data.Date}" Header="Date" FontWeight="Bold"/>
+									<DataGridTextColumn Binding="{Binding Path=Data.BatchNumber}" Header="BatchNumber" FontWeight="Bold"/>
+								</DataGrid.Columns>
+							</DataGrid>
 
-                        </Grid>
-                    </TabItem>
+							<!-- FiltersPanel -->
+							<Grid Name="FiltersPanel" Grid.Column="2" Visibility="Visible">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition  />
+									<ColumnDefinition Width="auto"/>
+								</Grid.ColumnDefinitions>
+								<GroupBox Header="Артикулы">
+									<Grid Grid.Column="0" Background="Beige" >
+										<Grid.RowDefinitions>
+											<RowDefinition Height="auto"/>
+											<RowDefinition Height="auto"/>
+											<RowDefinition Height="auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+											<RowDefinition Height="Auto"/>
+										</Grid.RowDefinitions>
 
-                </Controls:MetroAnimatedSingleRowTabControl>
-            </GroupBox>
-        </Grid>
+										<TextBlock Text="Поиск по названию" Grid.Row="0"/>
 
-        <!-- FiltersPanel -->
-        
-            <Grid Name="FiltersPanel" Grid.Column="2" Visibility="Collapsed">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition  />
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-            <GroupBox Header="Артикулы">
-                <Grid Grid.Column="0" Background="Beige" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+										<Toolkit:AutoCompleteBox Name="articlesNameTextBox" Grid.Row="1" Margin="10,0,10,0" ValueMemberPath="Name">
+											<Toolkit:AutoCompleteBox.ItemTemplate>
+												<DataTemplate>
+													<StackPanel Margin="3">
+														<TextBlock Text="{Binding Path=Name}"  FontWeight="ExtraBold" />
+														<TextBlock Text="{Binding Path=Number}"  FontStyle="Normal"/>
+													</StackPanel>
+												</DataTemplate>
+												
+											</Toolkit:AutoCompleteBox.ItemTemplate>
+										</Toolkit:AutoCompleteBox>
+										
 
-                    <DockPanel Grid.Row="0">
-                        <TextBlock Padding="8" TextTrimming="CharacterEllipsis" Foreground="Black" DockPanel.Dock="Left">Toolbox</TextBlock>
-                    </DockPanel>
-                    <ListBox Name="lb_articles" Padding="10" Grid.Row="1">
+										<TextBlock Text="Поиск по номеру артикула" Grid.Row="2" />
+										<Toolkit:AutoCompleteBox Name="articlesNumberTextBox" Grid.Row="3" Margin="10,0,10,0" ValueMemberPath="Number">
+											<Toolkit:AutoCompleteBox.ItemTemplate>
+												<DataTemplate>
+													<StackPanel Margin="3">
+														<TextBlock Text="{Binding Path=Number}" FontWeight="ExtraBold"  FontStyle="Normal"/>
+														<TextBlock Text="{Binding Path=Name}"  FontWeight="Normal"  FontStyle="Normal"/>
+													</StackPanel>
+												</DataTemplate>
 
-                    </ListBox>
-                </Grid>
-            </GroupBox>
-        </Grid>
+											</Toolkit:AutoCompleteBox.ItemTemplate>
+										</Toolkit:AutoCompleteBox>
+
+										<TextBlock Text="От" Grid.Row="4"
+												   />
+										<DatePicker Name="StartDatePicker" Grid.Row="5"
+													Margin="10,0,10,0"
+													/>
+										<TextBlock Text="До" Grid.Row="6"
+												   />
+										<DatePicker Name="EndDatePicker" Grid.Row="7"
+													Margin="10,0,10,0"
+													/>
+										<StackPanel Grid.Row="8">
+											<Button Content="Search" Name="SearchBtn" 
+												Margin="10,10,10,10"
+												Click="SearchBtn_Click"/>
+											<Button Content="Reset" Name="ResetBtn" 
+												Margin="10,10,10,10"
+												Click="ResetBtn_Click"/>
+											
+										</StackPanel>
+										
+
+										<GroupBox Header="Экспорт" Grid.Row="9">
+											<Grid>
+												<Grid.RowDefinitions>
+													<RowDefinition Height="auto"/>
+													<RowDefinition Height="auto"/>
+													<RowDefinition Height="auto"/>
+													<RowDefinition Height="Auto"/>
+													<RowDefinition Height="Auto"/>
+													<RowDefinition Height="Auto"/>
+													<RowDefinition Height="Auto"/>
+													<RowDefinition Height="Auto"/>
+													<RowDefinition Height="Auto"/>
+
+												</Grid.RowDefinitions>
+												<Button Content="Export In Excel" Name="ExportToExcelBtn" Grid.Row="0"
+												Margin="10,10,10,10"
+														Click="ExportToExcelBtn_Click"/>
+												<Button Content="Export In PDF" Name="ExportPDFBtn" Grid.Row="1"
+												Margin="10,10,10,10"/>
+												<Button Content="Print" Name="PrintBtn" Grid.Row="2"
+												Margin="10,10,10,10"/>
+
+											</Grid>
+										</GroupBox>
 
 
-        <GridSplitter Name="gs" Width="5" Grid.Column="1" HorizontalAlignment="Stretch"  />
-    </Grid>
+									</Grid>
+								</GroupBox>
+							</Grid>
+
+
+							<GridSplitter Name="gs" Width="5" Grid.Column="1" HorizontalAlignment="Stretch"  />
+
+						</Grid>
+					</TabItem>
+
+				</Controls:MetroAnimatedSingleRowTabControl>
+			</GroupBox>
+		</Grid>
+	</Grid>
 </UserControl>

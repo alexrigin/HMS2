@@ -28,7 +28,7 @@ namespace HMS.View
         public AddArticleWindow()
         {
             InitializeComponent();
-            DBManager.CreateDB();
+            //DBManager.CreateDB();
             //double h = System.Windows.SystemParameters.PrimaryScreenHeight;
             //double w = System.Windows.SystemParameters.PrimaryScreenWidth;
             //Debug.WriteLine("current_resolution=" + w + "x" + h);
@@ -42,13 +42,13 @@ namespace HMS.View
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            ArticleRecord article = new ArticleRecord(NameTextBox.Text,NumberTextBox.Text, 
-                MinDTextBox.Text.ToDouble(), MaxDTextBox.Text.ToDouble(),
-                MinHTextBox.Text.ToDouble(), MaxHTextBox.Text.ToDouble(),
-                MinSHTextBox.Text.ToDouble(), MaxSHTextBox.Text.ToDouble());
-            DBManager.InsertIntoArticles(article, new SQLiteConnection(Properties.Settings.Default.DBConnectionString));
+            //ArticleRecord article = new ArticleRecord(NameTextBox.Text,NumberTextBox.Text, 
+            //    MinDTextBox.Text.ToDouble(), MaxDTextBox.Text.ToDouble(),
+            //    MinHTextBox.Text.ToDouble(), MaxHTextBox.Text.ToDouble(),
+            //    MinSHTextBox.Text.ToDouble(), MaxSHTextBox.Text.ToDouble());
+            //DBManager.InsertIntoArticles(article, new SQLiteConnection(Properties.Settings.Default.DBConnectionString));
 
-            Debug.WriteLine(article.ToString());
+            //Debug.WriteLine(article.ToString());
             //this.Close();
         }
         private void CloseBtn_Click(object sender, RoutedEventArgs e)

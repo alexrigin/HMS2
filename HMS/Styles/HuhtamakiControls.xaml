@@ -1,0 +1,194 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HMS.Styles"
+					xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="options">
+	
+	<SolidColorBrush x:Key="LLLLVItem_Selected_and_MouseOver_BackgroundColorBrush" Color="{StaticResource BlueColor}" options:Freeze="True" />
+
+	<Style x:Key="HuhmakakiListView"
+           TargetType="{x:Type ListView}">
+		<Setter Property="BorderBrush"
+                Value="{DynamicResource BlackBrush}" />
+		<Setter Property="Background"
+                Value="{DynamicResource WhiteBrush}" />
+		<Setter Property="BorderThickness"
+                Value="0 1 0 0" />
+		<Setter Property="ScrollViewer.CanContentScroll"
+                Value="False" />
+		<Setter Property="AlternationCount"
+                Value="2" />
+
+		<!-- Things taken from the original template. -->
+		<Setter Property="SnapsToDevicePixels"
+                Value="true" />
+		<Setter Property="OverridesDefaultStyle"
+                Value="true" />
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                Value="Auto" />
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                Value="Auto" />
+		<Setter Property="VerticalContentAlignment"
+                Value="Center" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ListView">
+					<Border x:Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="true">
+						<ScrollViewer Padding="{TemplateBinding Padding}"
+                                      Style="{DynamicResource MetroGridViewScrollViewerStyle}">
+							<ItemsPresenter />
+						</ScrollViewer>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsGrouping"
+                                 Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll"
+                                    Value="false" />
+						</Trigger>
+						<Trigger Property="IsEnabled"
+                                 Value="false">
+							<Setter TargetName="Border"
+                                    Property="BorderBrush"
+                                    Value="{DynamicResource GrayBrush9}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="HuhtamakiVirtualisedMetroListView"
+           TargetType="{x:Type ListView}"
+           BasedOn="{StaticResource MetroListView}">
+		<Setter Property="VirtualizingStackPanel.IsVirtualizing"
+                Value="True" />
+		<Setter Property="VirtualizingStackPanel.VirtualizationMode"
+                Value="Recycling" />
+		<Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
+                Value="True" />
+		<Setter Property="ScrollViewer.CanContentScroll"
+                Value="True" />
+	</Style>
+
+	<Style x:Key="HuhtamakiListViewItem"
+           TargetType="{x:Type ListViewItem}">
+		<Setter Property="Foreground"
+                Value="{DynamicResource BlackBrush}" />
+		<Setter Property="HorizontalContentAlignment"
+                Value="Stretch" />
+		<Setter Property="VerticalContentAlignment"
+                Value="Center" />
+		<Setter Property="MinHeight"
+                Value="25" />
+		<Setter Property="Margin"
+                Value="0,0,0,0" />
+		<Setter Property="Border.BorderBrush"
+                Value="{DynamicResource GrayBrush1}" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListViewItem}">
+					<Border x:Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            SnapsToDevicePixels="true">
+						<Grid>
+							<GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+								<GridViewRowPresenter.Resources>
+									<Style TargetType="{x:Type TextBlock}">
+										<Setter Property="Foreground"
+                                                Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}, Path=Foreground}" />
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}"
+                                                         Value="True">
+												<Setter Property="Foreground"
+                                                        Value="{DynamicResource AccentSelectedColorBrush}" />
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                         Value="False">
+												<Setter Property="Foreground"
+                                                        Value="{DynamicResource GrayNormalBrush}" />
+											</DataTrigger>
+											<MultiDataTrigger>
+												<MultiDataTrigger.Conditions>
+													<Condition Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                                               Value="False" />
+													<Condition Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}"
+                                                               Value="True" />
+												</MultiDataTrigger.Conditions>
+												<MultiDataTrigger.Setters>
+													<Setter Property="Foreground"
+                                                            Value="{DynamicResource AccentSelectedColorBrush}" />
+												</MultiDataTrigger.Setters>
+											</MultiDataTrigger>
+										</Style.Triggers>
+									</Style>
+								</GridViewRowPresenter.Resources>
+							</GridViewRowPresenter>
+							<ContentPresenter x:Name="contentPresenter"
+                                              Visibility="Collapsed" />
+						</Grid>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="GridView.ColumnCollection"
+                                 Value="{x:Null}">
+							<Setter TargetName="contentPresenter"
+                                    Property="Visibility"
+                                    Value="Visible" />
+						</Trigger>
+						<Trigger Property="IsSelected"
+                                 Value="true">
+							<Setter TargetName="Bd"
+                                    Property="BorderBrush"
+                                    Value="#FF143c65" />
+							<Setter Property="Background"
+                                    TargetName="Bd"
+                                    Value="{DynamicResource LVItem_Selected_BackgroundColorBrush}" />
+							<Setter Property="Foreground"
+                                    Value="{DynamicResource AccentSelectedColorBrush}" />
+						</Trigger>
+						<Trigger Property="IsMouseOver"
+                                 Value="True">
+							<Setter TargetName="Bd"
+                                    Property="Background"
+                                    Value="{DynamicResource LVItem_MouseOver_BackgroundColorBrush}" />
+						</Trigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsSelected"
+                                           Value="true" />
+								<Condition Property="Selector.IsSelectionActive"
+                                           Value="True" />
+							</MultiTrigger.Conditions>
+							<Setter Property="Background"
+                                    TargetName="Bd"
+                                    Value="{DynamicResource AccentColorBrush2}" />
+							<Setter Property="BorderBrush"
+                                    TargetName="Bd"
+                                    Value="#FF143c65" />
+							<Setter Property="Foreground"
+                                    Value="{DynamicResource LVItem_Selected_and_MouseOver_BackgroundColorBrush}" />
+						</MultiTrigger>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsEnabled"
+                                           Value="False" />
+								<Condition Property="IsSelected"
+                                           Value="True" />
+							</MultiTrigger.Conditions>
+							<MultiTrigger.Setters>
+								<Setter TargetName="Bd"
+                                        Property="Background"
+                                        Value="{DynamicResource GrayBrush7}" />
+							</MultiTrigger.Setters>
+						</MultiTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

@@ -4,38 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace HMS.Tools
 {
     static class Converter
     {
-        //public static double ToDouble(string value)
-        //{
-        //    double number;
-        //
-        //    // Return if string is empty
-        //    if (String.IsNullOrEmpty(value))
-        //        return -1;
-        //
-        //
-        //    // Instantiate CultureInfo object for the user's locale
-        //    string culture = CultureInfo.CurrentCulture.Name;
-        //
-        //    // Convert user input from a string to a number
-        //    try
-        //    {
-        //        number = Double.Parse(value, CultureInfo.InvariantCulture);
-        //    }
-        //    catch (FormatException)
-        //    {
-        //        number = Double.Parse(value, CultureInfo.InvariantCulture);
-        //    }
-        //    catch (OverflowException)
-        //    {
-        //        return -1;
-        //    }
-        //    return number;
-        //}
 
         /// <summary>
         /// Преобразует string в double (независимая локаль)
@@ -44,7 +18,19 @@ namespace HMS.Tools
         /// <returns></returns>
         public static double ToDouble(this string str)
         {
-            return double.Parse(str.Replace(",", "."), CultureInfo.InvariantCulture);
+            if (!str.Equals(string.Empty))
+                return double.Parse(str.Replace(",", "."), CultureInfo.InvariantCulture);
+            else
+                return 0;
+        }
+
+        public static double? ToNullableDouble(this string str)
+        {
+            if (!str.Equals(string.Empty))
+                return Convert.ToDouble(str);
+            //return double.Parse(str.Replace(",", "."), CultureInfo.InvariantCulture);
+            else
+                return null;
         }
 
         public static string ToSqlString(this DateTime date)
@@ -53,9 +39,33 @@ namespace HMS.Tools
             return string.Format(dateTimeFormat, date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second);
         }
 
+        public static string ToSqlString(this double value)
+        {
+			Debug.WriteLine("value"+value);
+			string val = value.ToString(CultureInfo.GetCultureInfo("en-US").NumberFormat);
+			Debug.WriteLine("value2" + val);
+
+
+
+			return val;
+        }
+
+        public static string ToSqlString(this double? value)
+        {
+            return  value.ToString();
+        }
+
+
+		public static bool ReturnRefOfBool(ref bool value)
+		{
+			return value;
+		}
     }
+
+
+
     /// <summary>
-    /// Класс для создания запроса к базе данных
+    /// Класс для создания SELECT запроса к БД
     /// </summary>
     public class SQLRequest
     {
@@ -64,32 +74,34 @@ namespace HMS.Tools
         string _wherePart;
         string _limitPart;
         string _sortPart;
+        string _groupByPart;
         private IList<string> _filters = new List<string>();
 
-        public SQLRequest(string Fields, string FromPart, string WherePart, string SortPart, string LimitPart)
+        public SQLRequest(string Fields, string FromPart, string WherePart, string SortPart, string GroupByPart, string LimitPart)
         {
             _fields = Fields;
             _fromPart = FromPart;
             _wherePart = WherePart;
             _limitPart = LimitPart;
             _sortPart = SortPart;
+            _groupByPart = GroupByPart;
         }
 
-        public SQLRequest(string Fields, string FromPart, string WherePart, string SortPart) :
-            this(Fields, FromPart, WherePart, SortPart, "")
-        {
-
-        }
-        public SQLRequest(string Fields, string FromPart, string WherePart) :
-            this(Fields, FromPart, WherePart, "", "")
-        {
-
-        }
-        public SQLRequest(string Fields, string FromPart) :
-            this(Fields, FromPart, "", "", "")
-        {
-
-        }
+        //public SQLRequest(string Fields, string FromPart, string WherePart, string SortPart) :
+        //    this(Fields, FromPart, WherePart, SortPart, "","")
+        //{
+        //
+        //}
+        //public SQLRequest(string Fields, string FromPart, string WherePart) :
+        //    this(Fields, FromPart, WherePart, "", "")
+        //{
+        //
+        //}
+        //public SQLRequest(string Fields, string FromPart) :
+        //    this(Fields, FromPart, "", "", "")
+        //{
+        //
+        //}
 
 
         public string Fields { get { return _fields; } set { _fields = value; } }
@@ -104,10 +116,11 @@ namespace HMS.Tools
         }
         public string LimitPart { get { return _limitPart; } set { _limitPart = value; } }
         public string SortPart { get { return _sortPart; } set { _sortPart = value; } }
+        public string GroupByPart { get { return _groupByPart; } set { _groupByPart = value; } }
 
         public string SqlRequestString()
         {
-            string request = string.Format("SELECT {0} FROM {1} {2} {3} {4};", Fields, FromPart, WherePart, SortPart, LimitPart); ;
+            string request = string.Format("SELECT {0} FROM {1} {2} {3} {4} {5};", Fields, FromPart, WherePart, SortPart, GroupByPart, LimitPart); ;
             return request;
         }
 
@@ -144,7 +157,7 @@ namespace HMS.Tools
 
         public void ResetLimit()
         {
-            _limitPart = "";
+            LimitPart = "";
         }
         public void AddFilter(string filter)
         {

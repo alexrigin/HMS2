@@ -4,88 +4,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
+using HMS.Tools;
 
 namespace HMS.DataRecords
 {
+    /// <summary>
+    /// Модель данных для отображения в UI (DataGrid, ListView, etc.)
+    /// </summary>
     public class MeasurementRecord
     {
-        private int _id = -1;
-        private int _batchId = -1;
-        private int _number = 0;
-        private double _height;
-        private DateTime _date_h;
-        private double _seamerHeight;
-        private DateTime _date_sh;
-        private double _diameter;
-        private DateTime _date_d;
+        protected double? _height;
+        protected DateTime? _hTime;
+        protected double? _seamerHeight;
+        protected DateTime? _shTime;
+        protected double? _diameter;
+        protected DateTime? _dTime;
         
-        /// <summary>
-        /// Идентификатор записи
-        /// </summary>
-        public int Id { get { return _id; } set { _id = value; } }
-        /// <summary>
-        /// Идентификатор партии
-        /// </summary>
-        public int BatchIdId { get { return _batchId; } set { _batchId = value; } }
-        /// <summary>
-        /// Номер замера
-        /// </summary>
-        public int Number { get { return _number; } set { _number = value; } }
+       
         /// <summary>
         /// Высота
         /// </summary>
-        public double Height { get { return _height; } set { _height = value; } }
+        public double? Height { get { return _height; } set { _height = value; } }
         /// <summary>
-        /// Дата замера высоты
+        /// Время замера высоты
         /// </summary>
-        public DateTime DateH { get { return _date_h; } set { _date_h = value; } }
+        public DateTime? HTime { get { return _hTime; } set { _hTime = value; } }
         /// <summary>
         /// Высота закатки
         /// </summary>
-        public double SeamerHeight { get { return _seamerHeight; } set { _seamerHeight = value; } }
+        public double? SeamerHeight { get { return _seamerHeight; } set { _seamerHeight = value; } }
         /// <summary>
-        /// Дата замера высоты закатки
+        /// Время замера высоты закатки
         /// </summary>
-        public DateTime DateSH { get { return _date_sh; } set { _date_sh = value; } }
+        public DateTime? SHTime { get { return _shTime; } set { _shTime = value; } }
         /// <summary>
         /// Диаметр
         /// </summary>
-        public double Dameter { get { return _diameter; } set { _diameter = value; } }
+        public double? Diameter { get { return _diameter; } set { _diameter = value; } }
         /// <summary>
-        /// Дата замера диаметра
+        /// Время замера диаметра
         /// </summary>
-        public DateTime DateD { get { return _date_d; } set { _date_d = value; } }
+        public DateTime? DTime { get { return _dTime; } set { _dTime = value; } }
 
-
-
-        public MeasurementRecord(int Id, int BatchId, int Number, double Height, DateTime DataH, double SeamerHeight, DateTime DataSH, double Diameter, DateTime DataD)
-        {
-            _id = Id;
-            _batchId = BatchId;
-            _number = Number;
-            _height = Height;
-            _date_h = DataH;
-            _seamerHeight = SeamerHeight;
-            _date_sh = DateSH;
-            _diameter = Diameter;
-            _date_d = DataD;
-        }
 
         public MeasurementRecord()
         {
 
         }
 
-        public override string ToString()
+        /// <summary>
+        /// Инициализация нового объекта класса MeasurementRecord
+        /// </summary>
+        /// <param name="height">Высота</param>
+        /// <param name="hTime">Время замера высоты</param>
+        /// <param name="seamerHeight">Высота закатки</param>
+        /// <param name="shTime">Время замера высоты закатки</param>
+        /// <param name="diameter">Диаметр</param>
+        /// <param name="dTime">Время замера диаметра</param>
+        public MeasurementRecord(double? height, DateTime hTime, double? seamerHeight, DateTime shTime, double? diameter, DateTime dTime)
         {
-            //return string.Format("{0},{1},{2},{3};",Id,ArticleId,ArticleName,Date.ToString());
-            return "asd";
+            Height = height;
+            HTime = hTime;
+            SeamerHeight = seamerHeight;
+            SHTime = shTime;
+            Diameter = diameter;
+            DTime = dTime;
         }
 
-        public string ToSqlString()
+        public override string ToString()
         {
-            //return string.Format(string.Format("{0},{1},'{2}','{3}';", Id, ArticleId, ArticleName, Date.ToString(CultureInfo.GetCultureInfo("en-US"))));
-            return "asd";
+            return string.Format("{0}, {1}, {2}, {3}, {4}, {5} );",Height,HTime,SeamerHeight,SHTime,Diameter,DTime);
         }
+
     }
 }
